@@ -46,8 +46,9 @@ class Server:
         assert isinstance(page_size, int) and page_size > 0
         self.dataset()
         total_pages = ((len(self.__dataset) - 1 + page_size) // page_size)
+
         metadata = {
-            'page_size': page_size,
+            'page_size': 0 if page > total_pages else page_size,
             'page': page,
             'data': self.get_page(page, page_size),
         }
