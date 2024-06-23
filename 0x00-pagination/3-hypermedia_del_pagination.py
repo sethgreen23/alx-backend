@@ -51,8 +51,8 @@ class Server:
             if i in indexed_data:
                 data_page[i] = indexed_data[i]
             i += 1
-        data_indexes = data_page.keys()
-        data_values = data_page.values()
+        data_indexes = list(data_page.keys())
+        data_values = list(data_page.values())
 
         return {
             'index': index,
