@@ -41,7 +41,7 @@ class Server:
             return []
 
     def get_hyper(self, page: int = 1,
-                  page_size: int = 10) -> Dict[Union[int, None, str]]:
+                  page_size: int = 10) -> Dict[str, Union[int, None, str, List[List]]]:
         """Return the appropriate page of the dataset"""
         assert isinstance(page, int) and page > 0
         assert isinstance(page_size, int) and page_size > 0
