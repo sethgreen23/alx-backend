@@ -41,39 +41,22 @@ class Server:
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """Return the appropriate page of the dataset"""
-        self.indexed_dataset()
-        if self.__indexed_dataset is not None:
-            indexed_data = [row for row in self.__indexed_dataset.values()]
-            self.__indexed_dataset = {i: indexed_data[i]
-                                      for i in range(len(indexed_data))}
-        assert index in self.__indexed_dataset
 
-        # find the start index
-        start_index = next((idx for idx,
-                            _ in self.__indexed_dataset.items()
-                            if idx >= index))
-        # if start_index + page_size not in self.__indexed_dataset:
-        #     next_index = None
-        # else:
-        #     next_index = start_index + page_size
-        # end_idx = next_index or len(self.__indexed_dataset)
-        end_index = start_index + page_size - 1
-        num_items = len(self.__indexed_dataset)
-        num_pages = math.ceil(num_items / page_size)
-        current_page = start_index // page_size
-        if current_page < num_pages:
-            next_index = (current_page + 1) * page_size
-            if next_index >= num_items:
-                next_index = None
-        else:
-            next_index = None
-        data = [self.__indexed_dataset[i]
-                for i in range(start_index,
-                               min(end_index + 1, num_items))]
-        page_size = len(data)
+        assert 0 < index < len(self.dataset())
+        self.indexed_dataset()
+        data_page = {}
+
+        i = index
+        while len(data_page) < page_size and i < len(self.dataset()):
+            if i in self.__indexed_dataset:
+                data_page[i] = self.__indexed_dataset[i]
+            i += 1
+        data_indexes = data_page.keys()
+        data_values = data_page.values()
+
         return {
-            'index': start_index,
-            'data': data,
-            'page_size': page_size,
-            'next_index': next_index,
+            'index': index,
+            'data': data_values,
+            'page_size': len(data_values),
+            'next_index': max(data_indexes) + 1,
         }
