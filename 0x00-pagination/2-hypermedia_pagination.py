@@ -48,11 +48,10 @@ class Server:
         total_pages = ((len(self.__dataset) - 1 + page_size) // page_size)
 
         metadata = {
-            'page_size': 0 if page > total_pages else page_size,
+            'page_size': len(self.get_page(page, page_size)),
             'page': page,
             'data': self.get_page(page, page_size),
         }
-
         if page >= total_pages:
             metadata['next_page'] = None
         else:
