@@ -58,9 +58,9 @@ class Server:
             metadata['next_page'] = page + 1
 
         if page <= 1:
-            metadata['previeous_page'] = None
+            metadata['previous_page'] = None
         else:
-            metadata['previeous_page'] = page - 1
+            metadata['previous_page'] = page - 1
 
         metadata['total_pages'] = total_pages
         return metadata
