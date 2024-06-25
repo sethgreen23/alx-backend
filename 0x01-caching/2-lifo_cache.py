@@ -14,7 +14,8 @@ class LIFOCache(BaseCaching):
         """Add item to the Fifo cache"""
         if key is None or item is None:
             return
-        if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+        if (len(self.cache_data) >= BaseCaching.MAX_ITEMS and
+           key not in self.cache_data):
             old = self.__queue.pop()
             del self.cache_data[old]
             print(f'DISCARD: {old}')
