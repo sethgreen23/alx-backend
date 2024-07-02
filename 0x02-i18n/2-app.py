@@ -6,15 +6,15 @@ from flask_babel import Babel
 from config import Config
 
 
-app = Flask(__name__)
-app.config.from_object(Config)
-babel = Babel(app)
-
-
 @babel.localeselector
 def get_locale() -> str:
     """Get local"""
     return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+
+app = Flask(__name__)
+app.config.from_object(Config)
+babel = Babel(app, localeselector=get_locale)
 
 
 @app.route('/', methods=['GET'], strict_slashes=False)
