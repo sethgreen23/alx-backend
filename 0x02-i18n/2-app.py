@@ -14,7 +14,7 @@ def get_locale() -> str:
 
 app = Flask(__name__)
 app.config.from_object(Config)
-babel = Babel(app, localeselector=get_locale)
+babel = Babel(app)
 
 
 @app.route('/', methods=['GET'], strict_slashes=False)
