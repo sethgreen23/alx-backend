@@ -77,7 +77,7 @@ def home() -> str:
     utc_time = datetime.now(pytz.utc)
     local_time = utc_time.astimezone(pytz.timezone(user_timezone))
     formated_time = local_time.strftime("%b %d, %Y, %I:%M:%S %p")
-    return render_template('7-index.html', currentTime=formated_time)
+    return render_template('index.html', currentTime=formated_time)
 
 
 if __name__ == "__main__":
