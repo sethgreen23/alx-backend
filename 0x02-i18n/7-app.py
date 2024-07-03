@@ -72,7 +72,7 @@ def get_user() -> dict:
 @app.route('/', methods=['GET'], strict_slashes=False)
 def home() -> str:
     """Home route"""
-    return render_template('6-index.html')
+    return render_template('7-index.html')
 
 
 if __name__ == "__main__":
